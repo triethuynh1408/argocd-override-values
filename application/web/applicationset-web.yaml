@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: web-app
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/triethuynh1408/argocd-override-values.git
+      revision: HEAD
+      files:
+      - path: "overrides/web/web-override-values.yaml"
+  template:
+    metadata:
+      name: '{{name}}-example'
+    spec:
+      project: default
+      source:
+        helm:
+          valueFiles:
+          - web-app-values.yaml
+          values: |-
+            {{values}}
+        repoURL: https://github.com/triethuynh1408/gitops-argocd.git
+        targetRevision: HEAD
+        path: "charts/helm-example"
+      destination:
+        server: '{{address}}'
+        namespace: app
