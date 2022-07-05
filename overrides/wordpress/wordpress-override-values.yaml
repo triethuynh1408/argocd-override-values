@@ -1,5 +1,5 @@
 values: |
-  replicaCount: 3
+  replicaCount: 2
   ingress:
     enabled: true
-    hostname: wordpress.coinesto.com
+    hostname: wordpress.coinhako.com
