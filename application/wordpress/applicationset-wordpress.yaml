@@ -22,7 +22,7 @@ spec:
             {{values}}
         repoURL: https://github.com/helm/charts.git
         targetRevision: HEAD
-        path: "charts/stable/wordpress"
+        path: "stable/wordpress"
       destination:
         server: https://kubernetes.default.svc
         namespace: app
