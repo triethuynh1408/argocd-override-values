@@ -4,10 +4,4 @@ values: |
     limits:
       cpu: 100m
       memory: 128Mi
-  ingress:
-    enabled: false
-    annotations: {}
-    hosts:
-      - host: chart-example.coinesto.com
-        paths: []
-    tls: []
+  ingress.hosts[0].host: chart-example.coinesto.com
