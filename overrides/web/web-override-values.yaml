@@ -1,6 +1,6 @@
 values: |
-  replicaCount: 1
+  replicaCount: 2
   resources:
     limits:
-      cpu: 100m
+      cpu: 200m
       memory: 128Mi
