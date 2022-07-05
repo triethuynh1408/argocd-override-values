@@ -1,9 +1,10 @@
 values: |
-  replicaCount: 2
+  replicaCount: 1
+  ingress:
+    hosts:
+      - host: chart-example.coinesto.com
   resources:
     limits:
       cpu: 100m
       memory: 128Mi
-  ingress:
-    hosts:
-      - host: chart-example.coinesto.com
+
