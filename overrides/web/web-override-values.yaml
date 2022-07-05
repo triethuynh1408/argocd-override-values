@@ -1,9 +1,13 @@
 values: |
-  replicaCount: 3
+  replicaCount: 4
   resources:
     limits:
       cpu: 100m
       memory: 128Mi
   ingress:
+    enabled: false
+    annotations: {}
     hosts:
-      - host: chart-example.coinhako.com
+      - host: chart-example.coinesto.com
+        paths: []
+    tls: []
