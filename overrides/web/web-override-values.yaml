@@ -1,6 +1,9 @@
 values: |
-  replicaCount: 2
+  replicaCount: 3
   resources:
     limits:
-      cpu: 200m
+      cpu: 100m
       memory: 128Mi
+  ingress:
+    hosts:
+      - host: chart-example.coinhako.com
