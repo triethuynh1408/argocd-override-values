@@ -5,5 +5,6 @@ values: |
       cpu: 100m
       memory: 128Mi
   ingress:
+    enabled: true
     hosts:
       - host: chart-example.coinesto.com.vn
