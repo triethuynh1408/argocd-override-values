@@ -2,5 +2,4 @@ values: |
   replicaCount: 3
   ingress:
     enabled: true
-    certManager: false
     hostname: wordpress.coinesto.com
