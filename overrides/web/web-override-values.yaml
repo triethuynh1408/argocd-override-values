@@ -1,12 +1,12 @@
 values: |
-  fullnameOverride: test-ne
-  image:
-    pullPolicy: Always
-  replicaCount: 2
+  # fullnameOverride: test-ne
+  # image:
+  #   pullPolicy: Always
+  replicaCount: 3
   resources:
     limits:
-      cpu: 100m
+      cpu: 200m
       memory: 128Mi
-  ingress:
-    hosts:
-      - host: chart-example.coinesto.com.vn
+  # ingress:
+  #   hosts:
+  #     - host: chart-example.coinesto.com.vn
