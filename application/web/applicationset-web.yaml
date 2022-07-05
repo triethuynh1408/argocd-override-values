@@ -18,7 +18,7 @@ spec:
         helm:
           valueFiles:
           - web-app-values.yaml
-          values: |
+          values: |-
             {{values}}
         repoURL: https://github.com/triethuynh1408/gitops-argocd.git
         targetRevision: HEAD
