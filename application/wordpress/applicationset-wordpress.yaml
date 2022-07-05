@@ -11,7 +11,7 @@ spec:
       - path: "overrides/web/wordpress-override-values.yaml"
   template:
     metadata:
-      name: '{{name}}-example'
+      name: 'wordpress'
     spec:
       project: default
       source:
