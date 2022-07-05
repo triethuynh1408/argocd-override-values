@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: wordpress
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/triethuynh1408/argocd-override-values.git
+      revision: HEAD
+      files:
+      - path: "overrides/web/wordpress-override-values.yaml"
+  template:
+    metadata:
+      name: '{{name}}-example'
+    spec:
+      project: default
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          values: |-
+            {{values}}
+        repoURL: https://github.com/helm/charts.git
+        targetRevision: HEAD
+        path: "charts/stable/wordpress"
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: app
+      syncPolicy:
+        automated: {}

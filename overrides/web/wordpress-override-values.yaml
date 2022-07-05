@@ -1,0 +1,6 @@
+values: |
+  replicaCount: 2
+  ingress:
+    enabled: true
+    certManager: false
+    hostname: wordpress.coinesto.com
