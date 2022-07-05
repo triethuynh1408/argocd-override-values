@@ -1,4 +1,7 @@
 values: |
+  fullnameOverride: test-ne
+  image:
+    pullPolicy: Always
   replicaCount: 2
   resources:
     limits:
