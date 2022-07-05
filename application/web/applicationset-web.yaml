@@ -11,7 +11,7 @@ spec:
       - path: "overrides/web/web-override-values.yaml"
   template:
     metadata:
-      name: '{{name}}-example'
+      name: 'example'
     spec:
       project: default
       source:
@@ -27,6 +27,4 @@ spec:
         server: https://kubernetes.default.svc
         namespace: app
       syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+        automated: {}
