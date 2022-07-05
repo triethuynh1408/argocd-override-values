@@ -8,7 +8,7 @@ spec:
       repoURL: https://github.com/triethuynh1408/argocd-override-values.git
       revision: HEAD
       files:
-      - path: "overrides/web/wordpress-override-values.yaml"
+      - path: "overrides/wordpress/wordpress-override-values.yaml"
   template:
     metadata:
       name: 'wordpress'
