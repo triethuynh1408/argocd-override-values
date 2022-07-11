@@ -1,10 +1,4 @@
 values: |
-  hostAliases:
-    - ip: "54.254.78.205"
-      hostnames:
-      - "yield.coinesto.internal"
-      - "vasp-api.coinesto.internal"
-    
   secrets: 
     - name: rails-app-files
       vault_path: sandbox/data/apps/ch-web/preprod/files
