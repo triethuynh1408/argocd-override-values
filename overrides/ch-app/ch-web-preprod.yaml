@@ -1,0 +1,294 @@
+values: |
+  hostAliases:
+    - ip: "54.254.78.205"
+      hostnames:
+      - "yield.coinesto.internal"
+      - "vasp-api.coinesto.internal"
+    
+  secrets: 
+    - name: rails-app-files
+      vault_path: sandbox/data/apps/ch-web/preprod/files
+      type: Opaque
+      keys:
+      - newRelic_yml
+      - coinhakoInternal_crt
+      - firebase_adminsdk_json
+      - myinfo_coinhako_site_key
+      - consent_myinfo_gov_sg_cer
+      - coinhako_client_superwallet_coinhako_internal_chain_crt
+      - coinhako_client_superwallet_coinhako_internal_crt
+      - coinhako_client_superwallet_coinhako_internal_key
+      - riskengine_cert_ca_crt
+      - riskengine_cert_domain_crt
+      - riskengine_cert_domain_key
+      - riskengine_cert_rsa_public_key_pub
+      - yield_mtls_web_cert_crt
+      - yield_mtls_web_chain_crt
+      - yield_mtls_web_key_key
+      - vasp_cert_ca_crt
+      - vasp_cert_domain_crt
+      - vasp_cert_domain_key
+      - vasp_cert_rsa_public_key_pub
+      - coinesto_internal_ca
+      - app_setting_yml
+
+    - name: rails-app-database
+      vault_path: sandbox/data/apps/ch-web/preprod/database
+      type: Opaque
+      keys:
+      - database
+      - host
+      - password
+      - pool
+      - port
+      - timeout
+      - username
+      - use_makara
+      - database_master_host
+      - database_master_port
+      - database_master_username
+      - database_master_password
+      - database_database
+      - database_slave_1_host
+      - database_slave_1_port
+      - database_slave_1_username
+      - database_slave_1_password
+    - name: rails-app-env
+      vault_path: sandbox/data/apps/ch-web/preprod/appsettings
+      type: Opaque
+      keys:
+      - RAILS_ENV
+      - RAKE_ENV
+      - RAILS_LOG_TO_STDOUT
+      - RAILS_SERVE_STATIC_FILES
+      - HAKO_SCP_SRC
+      - allow_all_cors
+
+    - name: cdn-app-env
+      vault_path: sandbox/data/apps/ch-web/preprod/cdn
+      type: Opaque
+      keys:
+      - CORS_ORIGIN
+  
+  baseContainerEnvSecrets:
+    - name: database
+      secretName: rails-app-database
+      key: database
+    - name: host
+      secretName: rails-app-database
+      key: host
+    - name: password
+      secretName: rails-app-database
+      key: password
+    - name: pool
+      secretName: rails-app-database
+      key: pool
+    - name: port
+      secretName: rails-app-database
+      key: port
+    - name: timeout
+      secretName: rails-app-database
+      key: timeout
+    - name: username
+      secretName: rails-app-database
+      key: username
+    - name: use_makara
+      secretName: rails-app-database
+      key: use_makara
+    - name: database_master_host
+      secretName: rails-app-database
+      key: database_master_host
+    - name: database_master_port
+      secretName: rails-app-database
+      key: database_master_port
+    - name: database_master_username
+      secretName: rails-app-database
+      key: database_master_username
+    - name: database_master_password
+      secretName: rails-app-database
+      key: database_master_password
+    - name: database_database
+      secretName: rails-app-database
+      key: database_database
+    - name: database_slave_1_host
+      secretName: rails-app-database
+      key: database_slave_1_host
+    - name: database_slave_1_port
+      secretName: rails-app-database
+      key: database_slave_1_port
+    - name: database_slave_1_username
+      secretName: rails-app-database
+      key: database_slave_1_username
+    - name: database_slave_1_password
+      secretName: rails-app-database
+      key: database_slave_1_password
+
+    - name: RAILS_ENV
+      key: RAILS_ENV
+      secretName: rails-app-env
+    - name: RAKE_ENV
+      key: RAKE_ENV
+      secretName: rails-app-env
+    - name: RAILS_LOG_TO_STDOUT
+      key: RAILS_LOG_TO_STDOUT
+      secretName: rails-app-env
+    - name: RAILS_SERVE_STATIC_FILES
+      key: RAILS_SERVE_STATIC_FILES
+      secretName: rails-app-env
+    - name: HAKO_SCP_SRC
+      key: HAKO_SCP_SRC
+      secretName: rails-app-env
+    - name: allow_all_cors
+      key: allow_all_cors
+      secretName: rails-app-env
+
+  baseContainerVolumeSecrets:
+    - name: rails-files
+      secretName: rails-app-files
+      defaultMode: 420
+      mounts:
+      - mountPath: /var/www/ch_web/config/newrelic.yml
+        subPath: newRelic_yml
+      - mountPath: /opt/ch-web-data/coinhakoInternal.crt
+        subPath: coinhakoInternal_crt
+      - mountPath: /var/www/ch_web/config/firebase-adminsdk.json
+        subPath: firebase_adminsdk_json
+      - mountPath: /opt/ch-web-data/myinfo_coinhako_site.key
+        subPath: myinfo_coinhako_site_key
+      - mountPath: /opt/ch-web-data/consent_myinfo_gov_sg.cer
+        subPath: consent_myinfo_gov_sg_cer
+      - mountPath: /opt/ch-web-data/coinhako_client_superwallet_coinhako_internal_chain.crt
+        subPath: coinhako_client_superwallet_coinhako_internal_chain_crt
+      - mountPath: /opt/ch-web-data/coinhako_client_superwallet_coinhako_internal.crt
+        subPath: coinhako_client_superwallet_coinhako_internal_crt
+      - mountPath: /opt/ch-web-data/coinhako_client_superwallet_coinhako_internal.key
+        subPath: coinhako_client_superwallet_coinhako_internal_key
+      - mountPath: /opt/ch-web-data/riskengine_cert_ca.crt
+        subPath: riskengine_cert_ca_crt
+      - mountPath: /opt/ch-web-data/riskengine_cert_domain.crt
+        subPath: riskengine_cert_domain_crt
+      - mountPath: /opt/ch-web-data/riskengine_cert_domain.key
+        subPath: riskengine_cert_domain_key
+      - mountPath: /opt/ch-web-data/riskengine_cert_rsa_public_key.pub
+        subPath: riskengine_cert_rsa_public_key_pub
+      - mountPath: /opt/ch-web-data/yield_mtls_web_cert.crt
+        subPath: yield_mtls_web_cert_crt
+      - mountPath: /opt/ch-web-data/yield_mtls_web_chain.crt
+        subPath: yield_mtls_web_chain_crt
+      - mountPath: /opt/ch-web-data/yield_mtls_web_key.key
+        subPath: yield_mtls_web_key_key
+      - mountPath: /opt/ch-web-data/vasp_cert_ca.crt
+        subPath: vasp_cert_ca_crt
+      - mountPath: /opt/ch-web-data/vasp_cert_domain.crt
+        subPath: vasp_cert_domain_crt
+      - mountPath: /opt/ch-web-data/vasp_cert_domain.key
+        subPath: vasp_cert_domain_key
+      - mountPath: /opt/ch-web-data/vasp_cert_rsa_public_key.pub
+        subPath: vasp_cert_rsa_public_key_pub
+      - mountPath: /usr/local/share/ca-certificates/coinesto_internal_ca.crt
+        subPath: coinesto_internal_ca
+      - mountPath: /var/www/ch_web/config/app_settings.yml
+        subPath: app_setting_yml
+      - mountPath: /var/www/ch_web/config/coinhako.client.superwallet.coinhako.internal.chain.crt
+        subPath: riskengine_cert_ca_crt
+      - mountPath: /var/www/ch_web/config/coinhako.client.superwallet.coinhako.internal.crt
+        subPath: riskengine_cert_domain_crt
+      - mountPath: /var/www/ch_web/config/coinhako.client.superwallet.coinhako.internal.key
+        subPath: riskengine_cert_domain_key
+  
+  baseImage:
+    tag: preprod-95-2b9d0a8
+  
+  applications:
+    - name: web
+      replicaCount: 1
+      container:
+        resources:
+          requests:
+            cpu: 2
+            memory: 4Gi
+      autoscaling:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 5
+        targetCPUUtilizationPercentage: 80
+    
+    - name: www-fe
+      image:
+        tag: preprod-1-91a5f7b
+      replicaCount: 1
+      container:
+        resources:
+          requests:
+            cpu: 1
+            memory: 2Gi
+      autoscaling:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 5
+        targetCPUUtilizationPercentage: 80
+
+    - name: www-proxy
+      image:
+        tag: preprod-1-072f5ad
+      replicaCount: 1
+      container:
+        resources:
+          requests:
+            cpu: 2
+            memory: 4Gi
+      autoscaling:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 5
+        targetCPUUtilizationPercentage: 80
+    
+    - name: www-cdn
+      image:
+        tag: cdn-preprod-95-2b9d0a8
+      replicaCount: 1
+      container:
+        resources:
+          requests:
+            cpu: 1
+            memory: 2Gi
+      autoscaling:
+        enabled: false
+        minReplicas: 1
+        maxReplicas: 5
+        targetCPUUtilizationPercentage: 80
+
+  backgroundJobs:
+    - name: rt-ticker
+      command: bundle exec rake ticker
+    - name: rt-sgd-ticker
+      command: bundle exec rake sgd_ticker
+    - name: rt-sgd-ticker-concurrent
+      command: bundle exec rake sgd_ticker_concurrent
+    - name: rt-usd-ticker
+      command: bundle exec rake usd_ticker
+    - name: rt-vndt-ticker
+      command: bundle exec rake vndt_ticker
+    - name: rt-process-verify-trans-pending
+      command: bundle exec rake 'process_verification_transaction_pending[1]'
+    - name: sk-main
+      command: bundle exec sidekiq -C config/sidekiq/staging/sidekiq_main.yml
+    - name: sk-notification
+      command: bundle exec sidekiq -C config/sidekiq/staging/sidekiq_notification.yml
+    - name: sk-orders-trans
+      command: bundle exec sidekiq -C config/sidekiq/staging/sidekiq_orders_transaction.yml
+  
+  cronjobs:
+    - name: process-sub-finished
+      useBaseImage: true
+      replicaCount: 1
+      restartPolicy: Never
+      container:
+        command: [ "/bin/bash" ]
+        args:
+          - "-c"
+          - |
+            bundle exec rake process_subscription_finished:run
+        useBaseContainerEnvSecrets: true
+        useBaseContainerVolumeSecrets: true
+      schedule: "0 7 * * *" # every 15 PM UTC+8
